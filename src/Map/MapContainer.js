@@ -30,8 +30,14 @@ export class MapContainer extends Component {
     }
   };
 
+  replaceSpace = str => {
+    if(typeof str == "undefined") return "";
+    return str.replaceAll(" ","_");
+  }
+
   render() {
     var attractions = getAttractionList();
+    console.log(attractions);
     return (
         <Map
         google={this.props.google}
@@ -62,9 +68,9 @@ export class MapContainer extends Component {
             <h4>{this.state.activeMarker.name}</h4>
           </div>
           <div align="center">
-            <a href={'/gallery/'+this.state.activeMarker.name}>Gallery</a>
+            <a href={'/gallery/'+this.replaceSpace(this.state.activeMarker.name)}>Gallery</a>
             <br/>
-            <a href={'/post/'+this.state.activeMarker.name}>Post</a>
+            <a href={'/post/'+this.replaceSpace(this.state.activeMarker.name)}>Post</a>
           </div>
         </InfoWindow>
       </Map>
