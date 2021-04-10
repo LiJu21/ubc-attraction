@@ -1,3 +1,4 @@
+import beaty from './beaty.png'
 var attractionList = [
       {
         title: "Beaty Diversity Museum",

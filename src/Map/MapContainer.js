@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import { getAttractionList } from './Attractions';
 import {Layout} from 'antd';
+import background from './Header.png';
 
 const mapStyles = {
     width: '100%',
@@ -41,8 +42,8 @@ export class MapContainer extends Component {
     console.log(attractions);
     return (
       <Layout>
-        <Layout.Header>
-          {/* <h1 style={{color:'white'}}>Explore UBC</h1> */}
+        <Layout.Header style = {{backgroundImage:`url(${background})`,backgroundSize:"cover", 
+        height:"20vh", display:"flex", backgroundPosition:"center", position:"relative"}}>
         </Layout.Header>
         <Layout.Content>
           <Map
@@ -70,6 +71,7 @@ export class MapContainer extends Component {
               visible={this.state.showingInfoWindow}
               onClose={this.onClose}
             >
+
               <div align="center">
                 <h4>{this.state.activeMarker.name}</h4>
               </div>
