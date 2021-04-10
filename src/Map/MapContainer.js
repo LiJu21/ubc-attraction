@@ -62,8 +62,9 @@ export class MapContainer extends Component {
             <h4>{this.state.activeMarker.name}</h4>
           </div>
           <div align="center">
-            <a href={'/gallery?id='+this.state.activeMarker.name}>Gallery</a>
-            <a href={'/post?id='+this.state.activeMarker.name}>Post</a>
+            <a href={'/gallery/'+this.state.activeMarker.name}>Gallery</a>
+            <br/>
+            <a href={'/post/'+this.state.activeMarker.name}>Post</a>
           </div>
         </InfoWindow>
       </Map>

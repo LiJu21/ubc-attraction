@@ -40,7 +40,6 @@ const upload = ()=>{
 class Post extends React.Component{
     constructor(props){
         super(props);
-        console.log(this.props)
         this.state = {
             value : 0
         }
@@ -51,9 +50,11 @@ class Post extends React.Component{
     }
 
     post(){
-        var attraction_name = "botanical garden"
-        localStorage.setItem(attraction_name,imgUrlBase64);
-        console.log(imgUrlBase64[0]);
+        console.log(this.props);
+        message.success("You have successfully posted!");
+        var attraction_name = this.props.match.params[0];
+        console.log(JSON.stringify(imgUrlBase64));
+        localStorage.setItem(attraction_name,JSON.stringify(imgUrlBase64));
     }
 
     handleRateChange = value => {

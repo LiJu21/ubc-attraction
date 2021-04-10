@@ -1,7 +1,9 @@
 
 import {BrowserRouter,Route, Switch} from 'react-router-dom'
 import './App.css';
-import MapContainer from './MapContainer';
+import Gallery from './Gallery/Gallery';
+import MapContainer from './Map/MapContainer';
+import Post from './post/Post';
 
 function App() {
   return (
@@ -10,6 +12,8 @@ function App() {
         <Route path="/map">
           <MapContainer/>
         </Route>
+        <Route path="/post/*" component = {Post}/>
+        <Route path="/gallery/*" component = {Gallery}/>
       </Switch>
     </BrowserRouter>
   );
