@@ -1,12 +1,17 @@
-import logo from './logo.svg';
+
+import {BrowserRouter,Route, Switch} from 'react-router-dom'
 import './App.css';
-import Post from './post/Post';
+import MapContainer from './MapContainer';
 
 function App() {
   return (
-    <div className="App">
-      <Post />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/map">
+          <MapContainer/>
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
