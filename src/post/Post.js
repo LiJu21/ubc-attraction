@@ -40,8 +40,8 @@ const upload = ()=>{
 class Post extends React.Component{
     constructor(props){
         super(props);
-        this.state = {
-            value : 0
+        this.state={
+            value:5
         }
     }
 
@@ -54,14 +54,17 @@ class Post extends React.Component{
         message.success("You have successfully posted!");
         var attraction_name = this.props.match.params[0];
         console.log(JSON.stringify(imgUrlBase64));
+        //localStorage.clear()
         localStorage.setItem(attraction_name,JSON.stringify(imgUrlBase64));
     }
 
-    handleRateChange = value => {
-        this.setState({ value });
+    handleRateChange = v => {
+        this.setState({ value: v });
       };
 
     render(){
+        const {value} = this.state.value;
+        localStorage.clear()
         return(
             <Form {...layout} onFinish = {()=>this.post()}>
                 <h1>Post your memory here!</h1>
@@ -81,8 +84,8 @@ class Post extends React.Component{
                 </Form.Item>
                 <Form.Item>
                     <span>
-                        <Rate tooltips={desc} onChange={this.handleChange} value={this.state.value} defaultValue = {5} allowHalf/>
-                        {this.state.value ? <span className="ant-rate-text">{desc[Math.ceil(this.state.value) - 1]}</span> : ''}
+                        <Rate tooltips={desc} onChange={this.handleRateChange} defaultValue = {5} allowHalf/>
+                        {value ? <span className="ant-rate-text">{desc[Math.ceil(value) - 1]}</span> : ''}
                     </span>
                 </Form.Item>
                 <Form.Item>

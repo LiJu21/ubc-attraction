@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker } from 'google-maps-react';
 import { getAttractionList } from './Attractions';
+import {Layout} from 'antd';
 
 const mapStyles = {
     width: '100%',
@@ -39,42 +40,51 @@ export class MapContainer extends Component {
     var attractions = getAttractionList();
     console.log(attractions);
     return (
-        <Map
-        google={this.props.google}
-        zoom={14}
-        style={mapStyles}
-        initialCenter={
-          {
-            lat: 49.2607522179149,
-            lng: -123.24596161562468 // UBC coords
-          }
-        }
-      >
-        {attractions.map((attraction, index) => (
-            <Marker
-              key={index} // Need to be unique
-              onClick={this.onMarkerClick}
-              name={attraction.title}
-              position={attraction.position}
+      <Layout>
+        <Layout.Header>
+          {/* <h1 style={{color:'white'}}>Explore UBC</h1> */}
+        </Layout.Header>
+        <Layout.Content>
+          <Map
+            google={this.props.google}
+            zoom={14}
+            style={mapStyles}
+            initialCenter={
+              {
+                lat: 49.2607522179149,
+                lng: -123.24596161562468 // UBC coords
+              }
+            }
+          >
+            {attractions.map((attraction, index) => (
+                <Marker
+                  key={index} // Need to be unique
+                  onClick={this.onMarkerClick}
+                  name={attraction.title}
+                  position={attraction.position}
+                >
+                </Marker>
+              ))}
+            <InfoWindow
+              marker={this.state.activeMarker}
+              visible={this.state.showingInfoWindow}
+              onClose={this.onClose}
             >
-            </Marker>
-          ))}
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-          onClose={this.onClose}
-        >
-          <div align="center">
-            <h4>{this.state.activeMarker.name}</h4>
-          </div>
-          <div align="center">
-            <a href={'/gallery/'+this.replaceSpace(this.state.activeMarker.name)}>Gallery</a>
-            <br/>
-            <a href={'/post/'+this.replaceSpace(this.state.activeMarker.name)}>Post</a>
-          </div>
-        </InfoWindow>
-      </Map>
-            
+              <div align="center">
+                <h4>{this.state.activeMarker.name}</h4>
+              </div>
+              <div align="center">
+                <a href={'/gallery/'+this.replaceSpace(this.state.activeMarker.name)}>Gallery</a>
+                <br/>
+                <a href={'/post/'+this.replaceSpace(this.state.activeMarker.name)}>Post</a>
+              </div>
+            </InfoWindow>
+          </Map>
+        </Layout.Content>
+        <Layout.Footer style={{ textAlign: 'center' }}>
+          Explore UBC @2021
+        </Layout.Footer>
+      </Layout>
     );
 
 }
