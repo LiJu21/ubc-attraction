@@ -27,9 +27,9 @@ const photos = [
 class FakeGallery extends React.Component{
     constructor(props){
         super(props)
-        this.setState({
+        this.state = {
             currentIndex : 0
-        })
+        }
     }
 
     checkIndex(index){
@@ -39,14 +39,14 @@ class FakeGallery extends React.Component{
     render(){
         return(
             <div className = "hello">
-                <div class ="title">
+                <div className = "title">
                     <h1>Nitobe Memorial Garden Gallery</h1>
                     <h3>See what your friends posted here!</h3>
                 </div>
-                <div class="container">
+                <div className = "container">
                     {
                         photos.map((photo,index) => (
-                            <div className={()=>this.checkIndex(index)} onClick = {()=>{this.setState({currentIndex:index})}} style = {{backgroundImage: `url(${photo.url})`}}>
+                            <div className={this.checkIndex(index)} onClick = {()=>{this.setState({currentIndex:index})}} style = {{backgroundImage: `url(${photo.url})`}}>
                                 <h3>{photo.comment}</h3>
                             </div>
                         ))

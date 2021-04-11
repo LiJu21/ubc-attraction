@@ -4,13 +4,13 @@ import './App.css';
 import Gallery from './Gallery/Gallery';
 import MapContainer from './Map/MapContainer';
 import Post from './post/Post';
-import FakeGallery from './Gallery/FakeGallery'
+import ExampleGallery from './Gallery/ExampleGallery'
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
-      <Route path="/fakegallery" component={FakeGallery}/>
+      <Route path="/examplegallery" component={ExampleGallery}/>
         <Route path="/map">
           <MapContainer/>
         </Route>

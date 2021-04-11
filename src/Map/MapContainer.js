@@ -79,7 +79,7 @@ export class MapContainer extends Component {
               </div>
               <div align="center">
                 { this.state.activeMarker.id == 0 ? <a href={'/gallery/'+this.replaceSpace(this.state.activeMarker.name)}>Gallery</a> :
-                <a href={'/fakegallery'}>Gallery</a>}
+                <a href={'/examplegallery'}>Gallery</a>}
                 <br/>
                 <a href={'/post/'+this.replaceSpace(this.state.activeMarker.name)}>Post</a>
               </div>
