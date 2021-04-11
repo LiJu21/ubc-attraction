@@ -78,9 +78,8 @@ export class MapContainer extends Component {
                 <img width="200" height="150" src={this.state.activeMarker.id+'.PNG'}></img>
               </div>
               <div align="center">
-                {/* { this.state.activeMarker.id == 0 ? <a href={'/gallery/'+this.replaceSpace(this.state.activeMarker.name)}>Gallery</a> :
-                <a href={'/Gallery/gallery.html'}>Gallery</a>} */}
-                <a href={'/gallery/'+this.replaceSpace(this.state.activeMarker.name)}>Gallery</a>
+                { this.state.activeMarker.id == 0 ? <a href={'/gallery/'+this.replaceSpace(this.state.activeMarker.name)}>Gallery</a> :
+                <a href={'/fakegallery'}>Gallery</a>}
                 <br/>
                 <a href={'/post/'+this.replaceSpace(this.state.activeMarker.name)}>Post</a>
               </div>
