@@ -2,14 +2,16 @@ import React from 'react';
 import {Form, DatePicker, Input, Button, message, Rate} from 'antd';
 import moment from 'moment';
 import {UploadOutlined} from '@ant-design/icons'
+import './Post.css'
+import { Redirect } from 'react-router';
 
 var imgUrlBase64 = [];
 const desc = ['terrible', 'bad', 'normal', 'good', 'terrific'];
 
 const layout = {
-    labelCol: { span: 5},
+    labelCol: { span: 0},
     wrapperCol: { span: 100 },
-    labelAlign: "center"
+    labelAlign: "right"
 };
 
 const imgChange = e => {
@@ -31,6 +33,7 @@ const imgChange = e => {
         }
     }
     message.success(`${file_num} image${file_num > 1 ? "s" : ""} ha${file_num > 1 ? "ve" : "s"} been successfully uploaded`);
+    
 }
 
 const upload = ()=>{
@@ -41,7 +44,8 @@ class Post extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            value:5
+            value:5,
+            goToGallery: false
         }
     }
 
@@ -53,26 +57,38 @@ class Post extends React.Component{
         console.log(this.props);
         message.success("You have successfully posted!");
         var attraction_name = this.props.match.params[0];
-        console.log(JSON.stringify(imgUrlBase64));
-        //localStorage.clear()
+        // var current_photos = JSON.parse(localStorage.getItem(attraction_name));
+        // imgUrlBase64.forEach((img,index)=>{
+        //     current_photos.push(img);
+        // })
+        // console.log(current_photos);
+        localStorage.clear();
         localStorage.setItem(attraction_name,JSON.stringify(imgUrlBase64));
+        this.setState({
+            goToGallery: true
+        })
     }
 
     handleRateChange = v => {
         this.setState({ value: v });
-      };
+    };
 
     render(){
         const {value} = this.state.value;
-        localStorage.clear()
         return(
             <Form {...layout} onFinish = {()=>this.post()}>
-                <h1>Post your memory here!</h1>
-                <Form.Item label = "When did you find it?" rules={[{ required: true, message: 'Please select a date!' }]} >
+                {this.state.goToGallery ? <Redirect to={"/gallery/"+this.props.match.params[0]}/>: ""}
+                <div id = "post">
+                <h1 id = "id">Post your memory here!</h1>
+                <Form.Item>
+                    <Input id = "myname" placeholder = "Your name"/>
+                </Form.Item>
+                <Form.Item rules={[{ required: true, message: 'Please select a date!' }]} >
                     <DatePicker 
                         id = "date"
                         showTime
                         disabledDate = {this.disabledDate}
+                        placeholder = "Select the date of your visit"
                         style = {{width:300}}
                     />
                 </Form.Item>
@@ -80,7 +96,7 @@ class Post extends React.Component{
                     <Input type = "file" id = "myimg" multiple = 'multiple' onChange = {imgChange} style = {{visibility:'hidden'}}></Input>
                 </Form.Item>
                 <Form.Item>
-                    <Button icon = {<UploadOutlined/>} id = "test" onClick = {upload}>Upload some pictures about it!</Button>
+                    <Button icon = {<UploadOutlined/>} id = "test" onClick = {upload}>Share your memory!</Button>
                 </Form.Item>
                 <Form.Item>
                     <span>
@@ -89,8 +105,9 @@ class Post extends React.Component{
                     </span>
                 </Form.Item>
                 <Form.Item>
-                    <Button type = "primary" htmlType = 'submit' >Post</Button>
+                    <Button type = "primary" htmlType = 'submit' >SHARE</Button>
                 </Form.Item>
+                </div>
             </Form>
         )
     }

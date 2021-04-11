@@ -18,18 +18,18 @@ class Gallery extends React.Component{
         var photos = JSON.parse(localStorage.getItem(attraction_name));
         return(
             <div className = "hello">
-                <title>{attraction_name}</title>
+                <title>{attraction_name.replaceAll("_"," ")}</title>
                 <div className = "title">
-                    <h1>{attraction_name}</h1>
+                    <h1>{attraction_name.replaceAll("_"," ")}</h1>
                     <h3>See what your friends posted here!</h3>
-                    {/* <button class = "gobackbtn" onclick="goBack()">Go Back</button> */}
+                    <a href="/map" color='white'><button class = "gobackbtn">Go Back</button></a>
                 </div>
 
                 <div className = "container">
                 {
                     photos.map((photo,index) => (
                         <div className={this.checkIndex(index)} onClick = {()=>{this.setState({currentIndex:index})}} style = {{backgroundImage: `url(${photo.base64})`}}>
-                            <h3>Photo by @Julia on {photo.date}</h3>
+                            <h3>Photo by @Julia {"on"+photo.date}</h3>
                         </div>
                     ))
                 }

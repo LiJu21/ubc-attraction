@@ -63,6 +63,7 @@ export class MapContainer extends Component {
                   onClick={this.onMarkerClick}
                   name={attraction.title}
                   position={attraction.position}
+                  id = {attraction.id}
                 >
                 </Marker>
               ))}
@@ -74,8 +75,11 @@ export class MapContainer extends Component {
 
               <div align="center">
                 <h4>{this.state.activeMarker.name}</h4>
+                <img width="200" height="150" src={this.state.activeMarker.id+'.PNG'}></img>
               </div>
               <div align="center">
+                {/* { this.state.activeMarker.id == 0 ? <a href={'/gallery/'+this.replaceSpace(this.state.activeMarker.name)}>Gallery</a> :
+                <a href={'/Gallery/gallery.html'}>Gallery</a>} */}
                 <a href={'/gallery/'+this.replaceSpace(this.state.activeMarker.name)}>Gallery</a>
                 <br/>
                 <a href={'/post/'+this.replaceSpace(this.state.activeMarker.name)}>Post</a>
@@ -83,8 +87,8 @@ export class MapContainer extends Component {
             </InfoWindow>
           </Map>
         </Layout.Content>
-        <Layout.Footer style={{ textAlign: 'center' }}>
-          Explore UBC @2021
+        <Layout.Footer style = {{backgroundColor:"#002145",height:"3vh", display:"flex", position:"fixed", bottom:0, width:'100%', color:'white'}}>
+            Explore UBC @2021
         </Layout.Footer>
       </Layout>
     );
